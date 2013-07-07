@@ -51,29 +51,24 @@ ln -s /mnt/Home/bachir/Copy /home/bachir/Copy
 ln -s /mnt/Home/bachir/Developper /home/bachir/Developper
 ln -s /mnt/Home/bachir/Sites /home/bachir/Sites
 
-su bachir
 # install wifi drivers
-sudo urpmi --auto b43-fwcutter b43-openfwwf b43-tools
+urpmi --auto b43-fwcutter b43-openfwwf b43-tools
 cd /home/bachir/Downloads
 mkdir broadcom-4331
 cd broadcom-4331
 wget http://www.lwfinger.com/b43-firmware/broadcom-wl-5.100.138.tar.bz2
 tar -xjf broadcom-wl-5.100.138.tar.bz2
-sudo b43-fwcutter -w /lib/firmware/ broadcom-wl-5.100.138/linux/wl_apsta.o
-sudo rmmod b43
-sudo modprobe b43
+b43-fwcutter -w /lib/firmware/ broadcom-wl-5.100.138/linux/wl_apsta.o
+rmmod b43
+modprobe b43
 # you should not instalkl broadcom-bcma-config and rfkill
 # you should reboot after that
 
 # install basic softwares
-sudo urpmi --auto git synapse chromium-web-browser
+urpmi --auto git synapse chromium-web-browser
 
 #Add synapse to boot
 
-# install chrome
-sudo urpmi.addmedia --update chrome_x86_64 http://dl.google.com/linux/chrome/rpm/stable/x86_64
-sudo rpm --import https://dl-ssl.google.com/linux/linux_signing_key.pub
-sudo urpmi --auto --force google-chrome-stable
 
 #sublime text 2
 su bachir
@@ -84,36 +79,6 @@ wget http://c758482.r82.cf2.rackcdn.com/Sublime Text 2.0.1 x64.tar.bz2
 tar -vxjf Sublime\ Text\ 2.0.1\ x64.tar.bz2
 sudo mv Sublime\ Text\ 2 /opt/
 sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime
-sudo echo "[Desktop Entry]
-Version=1.0
-Name=Sublime Text 2
-# Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
-# From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
-GenericName=Text Editor
 
-Exec=sublime
-Terminal=false
-Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
-Type=Application
-Categories=TextEditor;IDE;Development
-X-Ayatana-Desktop-Shortcuts=NewWindow
-
-[NewWindow Shortcut Group]
-Name=New Window
-Exec=sublime -n
-TargetEnvironment=Unity" > /usr/local/share/applications/sublime.desktop
-
-sudo sed -i 's/gedit.desktop/sublime.desktop/g' /usr/share/applications/defaults.list
-
-# install package manager for sublime text 2
-# on sublime console
-# import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
-# throught shell script
-cd /home/bachir/Downloads
-wget https://sublime.wbond.net/Package%20Control.sublime-package
-mv Package\ Control.sublime-package /home/bachir/.config/sublime-text-2/Installed\ Packages/
-
-#gitGutter
-#apacheconf.tm-language
 
 
