@@ -68,7 +68,10 @@ sudo modprobe b43
 # install basic softwares
 sudo urpmi --auto git synapse chromium-web-browser
 
-#Add synapse to boot
+# liquidpompt
+cd ~/Developper
+got clone https://github.com/nojhan/liquidprompt.git
+echo "source ~/Developper/liquidprompt/liquidprompt" >> ~/.bashrc
 
 # install chrome
 sudo urpmi.addmedia --update chrome_x86_64 http://dl.google.com/linux/chrome/rpm/stable/x86_64
@@ -116,36 +119,33 @@ mv Package\ Control.sublime-package /home/bachir/.config/sublime-text-2/Installe
 echo '{
 	"installed_packages":
 	[
+		"All Autocomplete",
 		"ApacheConf.tmLanguage",
-		"Clipboard History",
-		"Color Schemes by carlcalderon",
-		"ColorPicker",
-		"CSS Media Query Snippets",
-		"Drupal",
-		"Drupal Snippets",
-		"EasySettings",
-		"Git Config",
-		"GitGutter",
-		"Goto Documentation",
-		"Goto Drupal API",
-		"HostsEdit",
-		"jQuery",
-		"LESS",
-		"Package Control",
-		"SSH Config",
-		"Theme - Soda",
-		"Todo",
-		"WordCount",
-		"XAML",
 		"Auto Encoding for Python",
 		"Auto Semi-Colon",
 		"BracketHighlighter",
 		"BufferScroll",
+		"Clipboard History",
+		"Color Schemes by carlcalderon",
+		"ColorPicker",
 		"ConvertToUTF8",
+		"CSS Media Query Snippets",
+		"Drupal",
+		"Drupal Snippets",
+		"EasySettings",
 		"FileDiffs",
 		"FileTemplates",
 		"Git",
+		"Git Config",
+		"GitGutter",
+		"Goto Documentation",
+		"Goto Drupal API",
+		"HighlightDuplicates",
+		"HostsEdit",
+		"jQuery",
 		"LaTeXTools",
+		"LESS",
+		"Package Control",
 		"PhpDoc",
 		"Processing",
 		"Python Auto-Complete",
@@ -153,11 +153,16 @@ echo '{
 		"SFTP",
 		"SideBarEnhancements",
 		"SideBarGit",
+		"SSH Config",
 		"STProjectMaker",
 		"SublimeCodeIntel",
 		"SublimeTODO",
 		"SyncedSideBar",
+		"Theme - Soda",
+		"Todo",
 		"Web Inspector",
+		"WordCount",
+		"XAML",
 		"ZenCoding"
 	]
 }
@@ -170,6 +175,8 @@ echo '{
     	"theme": "Soda Dark.sublime-theme",
     	"bold_folder_labels": true,
 	"preview_on_click": false,
+	"tab_size": 2,
+  	"translate_tabs_to_spaces": true,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -182,5 +189,8 @@ echo '[
 	{ "keys": ["super+alt+<"], "command": "focus_side_bar" },
 	{ "keys": ["f1"], "command": "fold" },
 	{ "keys": ["alt+f1"], "command": "unfold" },
-	{ "keys": ["f5"], "command": "goto_documentation" }
+	{ "keys": ["f5"], "command": "goto_documentation" },
+	{ "keys": ["ctrl+t"], "command": "side_bar_new_file2" },
+	{ "keys": ["f2"], "command": "side_bar_rename" },
+	{ "keys": ["ctrl+alt+f"], "command": "side_bar_find_files_path_containing" }
 ]' > /home/bachir/.config/sublime-text-2/Packages/User/Default\ (Linux).sublime-keymap
