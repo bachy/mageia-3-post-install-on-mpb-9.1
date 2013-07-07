@@ -194,3 +194,10 @@ echo '[
 	{ "keys": ["f2"], "command": "side_bar_rename" },
 	{ "keys": ["ctrl+alt+f"], "command": "side_bar_find_files_path_containing" }
 ]' > /home/bachir/.config/sublime-text-2/Packages/User/Default\ (Linux).sublime-keymap
+
+
+# install drop box
+sudo urpmi --auto nautilus-dropbox-1.6.0-1.mga3.nonfree.x86_64
+
+# install drop box
+sudo urpmi --auto get-skype
