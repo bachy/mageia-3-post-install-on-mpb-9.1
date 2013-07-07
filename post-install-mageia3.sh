@@ -76,7 +76,6 @@ sudo rpm --import https://dl-ssl.google.com/linux/linux_signing_key.pub
 sudo urpmi --auto --force google-chrome-stable
 
 #sublime text 2
-su bachir
 cd /home/bachir/Downloads
 mkdir sublimetext2
 cd sublimetext2
@@ -113,7 +112,75 @@ cd /home/bachir/Downloads
 wget https://sublime.wbond.net/Package%20Control.sublime-package
 mv Package\ Control.sublime-package /home/bachir/.config/sublime-text-2/Installed\ Packages/
 
-#gitGutter
-#apacheconf.tm-language
 
+echo '{
+	"installed_packages":
+	[
+		"ApacheConf.tmLanguage",
+		"Clipboard History",
+		"Color Schemes by carlcalderon",
+		"ColorPicker",
+		"CSS Media Query Snippets",
+		"Drupal",
+		"Drupal Snippets",
+		"EasySettings",
+		"Git Config",
+		"GitGutter",
+		"Goto Documentation",
+		"Goto Drupal API",
+		"HostsEdit",
+		"jQuery",
+		"LESS",
+		"Package Control",
+		"SSH Config",
+		"Theme - Soda",
+		"Todo",
+		"WordCount",
+		"XAML",
+		"Auto Encoding for Python",
+		"Auto Semi-Colon",
+		"BracketHighlighter",
+		"BufferScroll",
+		"ConvertToUTF8",
+		"FileDiffs",
+		"FileTemplates",
+		"Git",
+		"LaTeXTools",
+		"PhpDoc",
+		"Processing",
+		"Python Auto-Complete",
+		"Search Stack Overflow",
+		"SFTP",
+		"SideBarEnhancements",
+		"SideBarGit",
+		"STProjectMaker",
+		"SublimeCodeIntel",
+		"SublimeTODO",
+		"SyncedSideBar",
+		"Web Inspector",
+		"ZenCoding"
+	]
+}
+' > /home/bachir/.config/sublime-text-2/Packages/User/Package\ Control.sublime-settings
 
+echo '{
+	"color_scheme": "Packages/Color Schemes by carlcalderon/Stereokai/Stereokai.tmTheme",
+	"font_face": "",
+	"font_size": 11,
+    	"theme": "Soda Dark.sublime-theme",
+    	"bold_folder_labels": true,
+	"preview_on_click": false,
+	"ignored_packages":
+	[
+		"Vintage"
+	]
+}
+' > /home/bachir/.config/sublime-text-2/Packages/User/Preferences.sublime-settings
+
+echo '[
+	{ "keys": ["super+alt+1"], "command": "focus_group", "args": { "group": 0 } },
+	{ "keys": ["super+alt+<"], "command": "focus_side_bar" },
+	{ "keys": ["f1"], "command": "fold" },
+	{ "keys": ["alt+f1"], "command": "unfold" },
+	{ "keys": ["f5"], "command": "goto_documentation" }
+]' > /home/bachir/.config/sublime-text-2/Packages/User/Default\ (Linux).sublime-keymap
