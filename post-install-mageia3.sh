@@ -64,6 +64,9 @@ echo "source ~/Developper/liquidprompt/liquidprompt" >> ~/.bashrc
 # git config
 git config --global user.name $fullUserName
 git config --global user.email $userEmail
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=7200'
+
 
 # install chrome
 urpmi.addmedia --update chrome_x86_64 http://dl.google.com/linux/chrome/rpm/stable/x86_64
