@@ -1,11 +1,12 @@
 #Mageia 3 on macbookpro 9.1
 
-this is  my script as a note book about the installation of linux mageia 3 on my mac book pro 9.1
+this is  my script as a note book about the installation of linux mageia 3 Gnome desktop on my Macbook Pro 9.1
 
 /!\ you should read carrefully all the scripts before anything else 
 
 /!\ i never ran directly the main script post-install-mageia3.sh, i follow the lines and type commands by hand on a console, other specific scripts can be executed
 
+/!\ WORK IN PROGRESS
 
 ##share the same user uid between mac osx and linux
 this can't run through a script so you will have to make it by your self
@@ -31,3 +32,6 @@ su
 userdel -r tempuser
 ```
  
+
+
+ to be continued
