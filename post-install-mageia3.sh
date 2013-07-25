@@ -1,60 +1,126 @@
-# post install mageia 3 on MacBookPro 9.1
+##! /bin/sh
 
-# change bachir uid to 501 as osx user to share the same home folders
-# id -u bachir
-# sudo useradd -d /home/tempuser -m -s /bin/bash -G bachir tempuser
-# sudo usermod —uid 502 tempuser
-# sudo chown -R 502:bachir /home/tempuser
-#
-# restart as tempuser and then
-# sudo usermod —uid 501 bachir
-# sudo chown -R 501:bachir /home/bachir
-# 
-# restart as bachir and then
-# userdel -r tempuser
+# post install mageia 3 on MacBookPro 9.1
+# by Bachir Soussi Chiadmi www.g-u-i.net
+# @bachysoucychymy
+# dev@g-u-i.net
+
+userName = "bachir" # must be the same between osx and linux
+fullUserName = "Bachir Soussi Chiadmi";
+OsxVolume = "Osx" # volume where is installed your osx systeme (used for transfert and adapte apache2 config)
+userEmail = "bachir@g-u-i.net"
+$dataVolume = "Data"
 
 su
 
 # instal sudo
 urpmi sudo
-echo "bachir ALL=(ALL) ALL" >> /etc/sudoers
+echo "$userName ALL=(ALL) ALL" >> /etc/sudoers
+
+# install basic softwares
+sudo urpmi --auto git synapse chromium-browser-stable nano gnome-tweak-tool gconf-editor
+
+# gnome change workspace dual screen default behavior
+# http://gregcor.com/2011/05/07/fix-dual-monitors-in-gnome-3-aka-my-workspaces-are-broken/
+gsettings set org.gnome.shell.overrides workspaces-only-on-primary false 
+
+# apdapte apple key board
+# set fucntions key as default (https://help.ubuntu.com/community/AppleKeyboard)
+echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
+# permanently : add the command in /etc/rc.local if exists (use the create-rclocal-service.sh script)
+if [ -f /etc/rc.local ]; then
+  sed -i 's/exit 0/echo 2 | sudo tee \/sys\/module\/hid_apple\/parameters\/fnmode \nexit 0/g' /etc/rc.local
+fi
+# swap missplaced keys on usb external apple keyboard(ctr/<>)
+echo 0 | sudo tee /sys/module/hid_apple/parameters/iso_layout
+# permanently : add the command in /etc/rc.local if exists (use the create-rclocal-service.sh script)
+if [ -f /etc/rc.local ]; then
+  sed -i 's/exit 0/echo 0 | sudo tee \/sys\/module\/hid_apple\/parameters\/iso_layout \nexit 0/g' /etc/rc.local
+fi
+# swap ctrl and command keys (two options tested the frist one)
+# http://stackoverflow.com/questions/7099602/cmd-control-keys-swap-in-ubuntu
+echo "clear control
+clear mod4
+
+keycode 105 =
+keycode 206 =
+
+keycode 133 = Control_L NoSymbol Control_L
+keycode 134 = Control_R NoSymbol Control_R
+keycode 37 = Super_L NoSymbol Super_L
+
+add control = Control_L
+add control = Control_R
+add mod4 = Super_L" > ~/.Xmodmap
+
+sudo echo "xmodmap ~/.Xmodmap" >> ~/.bashrc 
+
+# echo "[Desktop Entry]
+# Name=Xmodmap
+# GenericName=Keyboard Remapping
+# Comment=Remap the Control and Command Keys on the MBP 8,2
+# Exec=xmodmap ~/.Xmodmap
+# Terminal=false
+# Type=Application
+# Categories=Keyboard;
+# StartupNotify=false" > ~/.config/autostart/xmodmap.desktop
+
+# OR from https://bbs.archlinux.org/viewtopic.php?id=156257"
+# echo "remove control = Control_L
+# remove mod4 = Super_L Super_R
+# keysym Control_L = Super_L
+# keysym Super_L = Control_L
+# keysym Super_R = Control_L
+# add control = Control_L Control_R
+# add mod4 = Super_L Super_R" > /etc/X11/xinit/.Xmodmap 
+
+# echo "[Desktop Entry]
+# Name=Xmodmap
+# GenericName=Keyboard Remapping
+# Comment=Remap the Control and Command Keys on the MBP 8,2
+# Exec=xmodmap /etc/X11/xinit/.Xmodmap
+# Terminal=false
+# Type=Application
+# Categories=Keyboard;
+# StartupNotify=false" > ~/.config/autostart/xmodmap.desktop
+
 
 # Add shared home partition
-mkdir /mnt/Home
-mount /dev/sda5 /mnt/Home
-echo "/dev/sda5 /mnt/Home auto rw,user,auto 0 0" >> /etc/fstab
+mkdir /mnt/$dataVolume
+mount /dev/sda6 /mnt/$dataVolume
+echo "/dev/sda6 /mnt/$dataVolume auto rw,user,auto 0 0" >> /etc/fstab
 
 #Desktop
-rm -rf /home/bachir/Desktop
-ln -s /mnt/Home/bachir/Desktop /home/bachir/Desktop
+rm -rf /home/$userName/Desktop
+ln -s /mnt/$dataVolume/$userName/Desktop /home/$userName/Desktop
 # Document
-rm -rf /home/bachir/Documents
-ln -s /mnt/Home/bachir/Documents /home/bachir/Documents
+rm -rf /home/$userName/Documents
+ln -s /mnt/$dataVolume/$userName/Documents /home/$userName/Documents
 # Pictures
-rm -rf /home/bachir/Images
-ln -s /mnt/Home/bachir/Pictures /home/bachir/Pictures
+rm -rf /home/$userName/Images
+ln -s /mnt/$dataVolume/$userName/Pictures /home/$userName/Pictures
 #Templates
-rm -rf /home/bachir/Modèles
-ln -s /mnt/Home/bachir/Templates /home/bachir/Templates
+rm -rf /home/$userName/Modèles
+ln -s /mnt/$dataVolume/$userName/Templates /home/$userName/Templates
 #Music
-rm -rf /home/bachir/Musique
-ln -s /mnt/Home/bachir/Music /home/bachir/Music
+rm -rf /home/$userName/Musique
+ln -s /mnt/$dataVolume/$userName/Music /home/$userName/Music
 #Downloads
-rm -rf /home/bachir/Téléchargement
-ln -s /mnt/Home/bachir/Downloads /home/bachir/Downloads
+rm -rf /home/$userName/Téléchargement
+ln -s /mnt/$dataVolume/$userName/Downloads /home/$userName/Downloads
 #Movies
-rm -rf /home/bachir/Vidéos
-ln -s /mnt/Home/bachir/Movies /home/bachir/Movies
+rm -rf /home/$userName/Vidéos
+ln -s /mnt/$dataVolume/$userName/Movies /home/$userName/Movies
 #MISC
-ln -s /mnt/Home/bachir/Dropbox /home/bachir/Dropbox
-ln -s /mnt/Home/bachir/Copy /home/bachir/Copy
-ln -s /mnt/Home/bachir/Developper /home/bachir/Developper
-ln -s /mnt/Home/bachir/Sites /home/bachir/Sites
+ln -s /mnt/$dataVolume/$userName/Dropbox /home/$userName/Dropbox
+ln -s /mnt/$dataVolume/$userName/Copy /home/$userName/Copy
+ln -s /mnt/$dataVolume/$userName/Developper /home/$userName/Developper
+ln -s /mnt/$dataVolume/$userName/Sites /home/$userName/Sites
 
-su bachir
+su $userName
 # install wifi drivers
 sudo urpmi --auto b43-fwcutter b43-openfwwf b43-tools
-cd /home/bachir/Downloads
+cd /home/$userName/Downloads
 mkdir broadcom-4331
 cd broadcom-4331
 wget http://www.lwfinger.com/b43-firmware/broadcom-wl-5.100.138.tar.bz2
@@ -65,139 +131,88 @@ sudo modprobe b43
 # you should not instalkl broadcom-bcma-config and rfkill
 # you should reboot after that
 
-# install basic softwares
-sudo urpmi --auto git synapse chromium-web-browser
-
 # liquidpompt
 cd ~/Developper
 got clone https://github.com/nojhan/liquidprompt.git
 echo "source ~/Developper/liquidprompt/liquidprompt" >> ~/.bashrc
+
+# git config
+git config --global user.name $fullUserName
+git config --global user.email $userEmail
 
 # install chrome
 sudo urpmi.addmedia --update chrome_x86_64 http://dl.google.com/linux/chrome/rpm/stable/x86_64
 sudo rpm --import https://dl-ssl.google.com/linux/linux_signing_key.pub
 sudo urpmi --auto --force google-chrome-stable
 
-#sublime text 2
-cd /home/bachir/Downloads
-mkdir sublimetext2
-cd sublimetext2
-wget http://c758482.r82.cf2.rackcdn.com/Sublime Text 2.0.1 x64.tar.bz2
-tar -vxjf Sublime\ Text\ 2.0.1\ x64.tar.bz2
-sudo mv Sublime\ Text\ 2 /opt/
-sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime
-sudo echo "[Desktop Entry]
-Version=1.0
-Name=Sublime Text 2
-# Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
-# From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
-GenericName=Text Editor
-
-Exec=sublime
-Terminal=false
-Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
-Type=Application
-Categories=TextEditor;IDE;Development
-X-Ayatana-Desktop-Shortcuts=NewWindow
-
-[NewWindow Shortcut Group]
-Name=New Window
-Exec=sublime -n
-TargetEnvironment=Unity" > /usr/local/share/applications/sublime.desktop
-
-sudo sed -i 's/gedit.desktop/sublime.desktop/g' /usr/share/applications/defaults.list
-
-# install package manager for sublime text 2
-# on sublime console
-# import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
-# throught shell script
-cd /home/bachir/Downloads
-wget https://sublime.wbond.net/Package%20Control.sublime-package
-mv Package\ Control.sublime-package /home/bachir/.config/sublime-text-2/Installed\ Packages/
-
-
-echo '{
-	"installed_packages":
-	[
-		"All Autocomplete",
-		"ApacheConf.tmLanguage",
-		"Auto Encoding for Python",
-		"Auto Semi-Colon",
-		"BracketHighlighter",
-		"BufferScroll",
-		"Clipboard History",
-		"Color Schemes by carlcalderon",
-		"ColorPicker",
-		"ConvertToUTF8",
-		"CSS Media Query Snippets",
-		"Drupal",
-		"Drupal Snippets",
-		"EasySettings",
-		"FileDiffs",
-		"FileTemplates",
-		"Git",
-		"Git Config",
-		"GitGutter",
-		"Goto Documentation",
-		"Goto Drupal API",
-		"HighlightDuplicates",
-		"HostsEdit",
-		"jQuery",
-		"LaTeXTools",
-		"LESS",
-		"Package Control",
-		"PhpDoc",
-		"Processing",
-		"Python Auto-Complete",
-		"Search Stack Overflow",
-		"SFTP",
-		"SideBarEnhancements",
-		"SideBarGit",
-		"SSH Config",
-		"STProjectMaker",
-		"SublimeCodeIntel",
-		"SublimeTODO",
-		"SyncedSideBar",
-		"Theme - Soda",
-		"Todo",
-		"Web Inspector",
-		"WordCount",
-		"XAML",
-		"ZenCoding"
-	]
-}
-' > /home/bachir/.config/sublime-text-2/Packages/User/Package\ Control.sublime-settings
-
-echo '{
-	"color_scheme": "Packages/Color Schemes by carlcalderon/Stereokai/Stereokai.tmTheme",
-	"font_face": "",
-	"font_size": 11,
-    	"theme": "Soda Dark.sublime-theme",
-    	"bold_folder_labels": true,
-	"preview_on_click": false,
-	"tab_size": 2,
-  	"translate_tabs_to_spaces": true,
-	"ignored_packages":
-	[
-		"Vintage"
-	]
-}
-' > /home/bachir/.config/sublime-text-2/Packages/User/Preferences.sublime-settings
-
-echo '[
-	{ "keys": ["super+alt+1"], "command": "focus_group", "args": { "group": 0 } },
-	{ "keys": ["super+alt+<"], "command": "focus_side_bar" },
-	{ "keys": ["f1"], "command": "fold" },
-	{ "keys": ["alt+f1"], "command": "unfold" },
-	{ "keys": ["f5"], "command": "goto_documentation" },
-	{ "keys": ["ctrl+t"], "command": "side_bar_new_file2" },
-	{ "keys": ["f2"], "command": "side_bar_rename" },
-	{ "keys": ["ctrl+alt+f"], "command": "side_bar_find_files_path_containing" }
-]' > /home/bachir/.config/sublime-text-2/Packages/User/Default\ (Linux).sublime-keymap
-
 
 # install drop box
 sudo urpmi --auto nautilus-dropbox-1.6.0-1.mga3.nonfree.x86_64
 
-# install drop box
-sudo urpmi --auto get-skype
+# install skype
+# not so simple : http://www.mageialinux-online.org/wiki/installer-skype-sur-sa-mageia
+# sudo urpmi --auto get-skype
+
+# install filezilla
+sudo urpmi --auto filezilla
+# http://www.code-zen.net/2009/syncing-filezilla-sites-across-computers-with-dropbox/
+
+# LAMP #
+# http://linuxtricks.asso-linux-online.fr/wiki/installer-un-serveur-lamp-sous-mageia
+sudo urpmi task-lamp
+
+# Before that we should mount MacOsX
+su
+mount $OsxVolume
+
+mv /etc/hosts /etc/hosts.back
+cp run/media/bachir/$MacVolume/etc/hosts /etc/hosts
+
+mkdir /etc/httpd/conf/users.d
+cp run/media/bachir/$MacVolume/etc/apache2/users/bach.conf /etc/httpd/conf/users.d
+echo "
+# Include users config
+Include conf/users.d/*.conf" >> /etc/httpd/conf/httpd.conf
+
+# remove these lines
+# ErrorLog "/private/var/log/apache2/materio-error_log"
+# CustomLog "/private/var/log/apache2/materio-access_log" common
+
+#sed -i 's/ErrorLog/# ErrorLog/g' /etc/httpd/conf/users.d/bach.conf
+#sed -i 's/CustomLog/# CustomLog/g' /etc/httpd/conf/users.d/bach.conf
+sed -i 's/private\/var\/log\/apache2/var\/logs\/httpd/g' /etc/httpd/conf/users.d/bach.conf
+sed -i 's/\/Users\/bachir\/Sites/\/home\/bachir\/Sites/g' /etc/httpd/conf/users.d/bach.conf
+
+# Todo : place next line for each vhosts  but how ??
+# <Directory "/home/bachir/Sites/materio/base_d7">
+#      Require local
+# </Directory>p
+
+
+# php conf
+sed -i 's/memory_limit = 128M/memory_limit = 256M/g' /etc/php.ini
+urpmi --auto php-pdo_mysql
+
+# start lamp services
+sudo service htpd start
+sudo service mysqld start
+
+#mysql
+MysqlUser = "root"
+MysqlPass = "Lhip2L2Mysql!"
+mysqladmin -u $MysqlUser password $MysqlPass
+
+# Todo : import all db automaticly 
+# cd ~/Developper/mysql.back
+# for file in *; 
+# do
+#    if [[ $file == ^.*\.sql$ ]]; then
+#       DbName = sed 's/.sql//g' $echo
+# 	   mysqladmin -u $MysqlUser -p$MysqlPass create $DbName
+#	    mysql -u $MysqlUser -p$MysqlPass $DbName < $file
+#    fi
+# done
+
+
+
+ 
