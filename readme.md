@@ -1,6 +1,11 @@
 #Mageia 3 on macbookpro 9.1
 
-this is  my script as a note book about the installation of linux mageia 3 Gnome desktop on my Macbook Pro 9.1
+i was thinking about it for a long time, and two weeks ago i did it, I am working now under linux !
+i installed mageia 3 in dual boot with refit on my macbook pro 9.1.
+I chose mageia because of the comunity-based, non commercial, multipurpose aspects of the project (also because i'm french :P)
+And i am realy hapy with it so far, so thank you for all your work guys !
+
+this is  my script collection as a note book about the installation of linux mageia 3 Gnome desktop on my Macbook Pro 9.1
 
 /!\ you should read carrefully all the scripts before anything else 
 
