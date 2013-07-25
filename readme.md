@@ -9,20 +9,25 @@ this is  my script as a note book about the installation of linux mageia 3 on my
 
 ##share the same user uid between mac osx and linux
 this can't run through a script so you will have to make it by your self
+get this from [here](http://lifehacker.com/5702815/the-complete-guide-to-sharing-your-data-across-multiple-operating-systems)
 
 ####change linux user uid to 501 as osx user to share the same home folders
-    su
-    id -u yourusername
-    useradd -d /home/tempuser -m -s /bin/bash -G yourusername tempuser
-    usermod -u 502 tempuser
-    chown -R 502:yourusername /home/tempuser
-
+```Batchfile
+su
+id -u yourusername
+useradd -d /home/tempuser -m -s /bin/bash -G yourusername tempuser
+usermod -u 502 tempuser
+chown -R 502:yourusername /home/tempuser
+```
 ####restart as tempuser and then
-    su
-    usermod -u 501 yourusername
-    chown -R 501:yourusername /home/yourusername
- 
+```Batchfile
+su
+usermod -u 501 yourusername
+chown -R 501:yourusername /home/yourusername
+```
 ####restart as yourusername and then
-    su
-    userdel -r tempuser
+```Batchfile
+su
+userdel -r tempuser
+```
  
