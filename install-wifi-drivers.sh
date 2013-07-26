@@ -1,4 +1,4 @@
-##! /bin/sh
+#! /bin/sh
 
 # install wifi driver for braodcom 4331
 # by Bachir Soussi Chiadmi www.g-u-i.net

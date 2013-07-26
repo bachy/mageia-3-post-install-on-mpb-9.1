@@ -1,4 +1,4 @@
-##! /bin/sh
+#! /bin/sh
 
 # configure keyboard
 # by Bachir Soussi Chiadmi www.g-u-i.net
@@ -6,7 +6,7 @@
 # dev@g-u-i.net
 
 
-# run create-rclocal-service.sh before this script
+urpmi --auto xev
 
 # set fucntions key as default (https://help.ubuntu.com/community/AppleKeyboard)
 echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
@@ -39,7 +39,7 @@ add control = Control_L
 add control = Control_R
 add mod4 = Super_L" > ~/.Xmodmap
 
-sudo echo "xmodmap ~/.Xmodmap" >> ~/.bashrc 
+sudo echo "xmodmap ~/.Xmodmap" >> ~/.xinitrc 
 
 # following is not working
 

@@ -14,8 +14,7 @@ this is  my script collection as a note book about the installation of linux mag
 /!\ WORK IN PROGRESS
 
 ##share the same user uid between mac osx and linux
-this can't run through a script so you will have to make it by your self
-get this from [here](http://lifehacker.com/5702815/the-complete-guide-to-sharing-your-data-across-multiple-operating-systems)
+This can't run through a script so you will have to make it by your self. Get this from [here](http://lifehacker.com/5702815/the-complete-guide-to-sharing-your-data-across-multiple-operating-systems)
 
 ####change linux user uid to 501 as osx user to share the same home folders
 ```Batchfile

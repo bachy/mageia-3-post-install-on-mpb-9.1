@@ -1,4 +1,4 @@
-##! /bin/sh
+#! /bin/sh
 
 # install Sublime Sublime text 2
 # by Bachir Soussi Chiadmi www.g-u-i.net

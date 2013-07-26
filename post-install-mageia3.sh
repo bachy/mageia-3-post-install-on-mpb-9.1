@@ -1,4 +1,4 @@
-##! /bin/sh
+#! /bin/sh
 
 # post install mageia 3 on MacBookPro 9.1
 # by Bachir Soussi Chiadmi www.g-u-i.net

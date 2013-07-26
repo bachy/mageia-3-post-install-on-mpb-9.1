@@ -1,13 +1,12 @@
-##! /bin/sh
+#! /bin/sh
 
 #re-create an rc.local fonctionality
 #http://linuxtricks.asso-linux-online.fr/wiki/systemd-restaurer-la-fonctionnalite-rc-local
+# THIS DOES NOT WORK FOR ME :(
 
 # by Bachir Soussi Chiadmi www.g-u-i.net
 # @bachysoucychymy
-# dev@g-u-i.net
-
-
+# dev@g-u-i.netch
 
 echo "[Unit]
 Description=/etc/rc.local
