@@ -89,6 +89,15 @@ urpmi --auto filezilla
 # http://linuxtricks.asso-linux-online.fr/wiki/installer-un-serveur-lamp-sous-mageia
 urpmi task-lamp
 
+#replace apache user to match with osx apache user _www:_www
+groupadd _www
+useradd _www _www
+usermod -u 70 _www
+groupmod -u 70 _www
+
+sed -i 's/private\/var\/log\/apache2/var\/logs\/httpd/g' /etc/httpd/conf/users.d/bach.conf
+
+
 # Before that we should mount MacOsX
 mount $OsxVolume
 
