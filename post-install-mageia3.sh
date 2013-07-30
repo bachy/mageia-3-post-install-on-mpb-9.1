@@ -95,7 +95,8 @@ useradd _www _www
 usermod -u 70 _www
 groupmod -u 70 _www
 
-sed -i 's/private\/var\/log\/apache2/var\/logs\/httpd/g' /etc/httpd/conf/users.d/bach.conf
+sed -i 's/User apache/User _www/g' /etc/httpd/conf/httpd.conf
+sed -i 's/Group apache/Group _www/g' /etc/httpd/conf/httpd.conf
 
 
 # Before that we should mount MacOsX
