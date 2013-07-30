@@ -58,7 +58,7 @@ echo "/dev/sda6 /mnt/$dataVolume auto rw,user,auto 0 0" >> /etc/fstab
 
 # liquidpompt
 cd ~/Developper
-got clone https://github.com/nojhan/liquidprompt.git
+git clone https://github.com/nojhan/liquidprompt.git
 echo "source ~/Developper/liquidprompt/liquidprompt" >> ~/.bashrc
 
 # git config
@@ -151,6 +151,14 @@ mysqladmin -u $MysqlUser password $MysqlPass
 #    fi
 # done
 
+#install drush
+cd /home/bachir/Downloads
+mkdir drush
+cd drush
+wget http://ftp.drupal.org/files/projects/drush-7.x-5.9.tar.gz
+tar -vxjf drush-7.x-5.9.tar.gz
+sudo mv drush /opt/
+sudo ln -s /opt/drush/drush /usr/bin/drush
 
 
  
