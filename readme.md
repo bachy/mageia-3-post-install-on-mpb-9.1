@@ -1,4 +1,4 @@
-#Mageia 3 on macbookpro 9.1
+  #Mageia 3 on macbookpro 9.1
 
 i was thinking about it for a long time, and two weeks ago i did it, I am working now under linux !
 i installed mageia 3 in dual boot with refit on my macbook pro 9.1.
@@ -36,6 +36,4 @@ su
 userdel -r tempuser
 ```
  
-
-
- to be continued
+i'll continu the readme but until then, please follow the script sources.
