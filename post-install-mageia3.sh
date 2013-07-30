@@ -64,9 +64,12 @@ echo "source ~/Developper/liquidprompt/liquidprompt" >> ~/.bashrc
 # git config
 git config --global user.name $fullUserName
 git config --global user.email $userEmail
-git config --global credential.helper cache
+#git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
-
+git config --global color.ui true
+git config --global core.excludesfile '~/.gitignore_global'
+echo "*.sublime-project" >> ~/.gitignore_global
+echo "*.sublime-workspace" >> ~/.gitignore_global
 
 # install chrome
 urpmi.addmedia --update chrome_x86_64 http://dl.google.com/linux/chrome/rpm/stable/x86_64
@@ -97,7 +100,6 @@ groupmod -u 70 _www
 
 sed -i 's/User apache/User _www/g' /etc/httpd/conf/httpd.conf
 sed -i 's/Group apache/Group _www/g' /etc/httpd/conf/httpd.conf
-
 
 # Before that we should mount MacOsX
 mount $OsxVolume
