@@ -31,6 +31,7 @@ sudo service network restart
 urpmi --auto synapse zeitgeist bc
 urpmi --auto chromium-browser-stable gajim
 urpmi --auto gnome-tweak-tool gconf-editor
+urpmi --auto knock
 
 # gnome change workspace dual screen default behavior
 # http://gregcor.com/2011/05/07/fix-dual-monitors-in-gnome-3-aka-my-workspaces-are-broken/
