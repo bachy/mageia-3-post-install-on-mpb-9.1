@@ -1,5 +1,10 @@
 #! /bin/sh
 
+# /!\ /!\ /!\ /!\  in mageia 4 gnome network manager is disabled by default
+# /!\ /!\ /!\ /!\  so we use net_applet and wifi works from scratch
+# /!\ /!\ /!\ /!\  let test it 
+
+
 # install wifi driver for braodcom 4331
 # by Bachir Soussi Chiadmi www.g-u-i.net
 # @bachysoucychymy
@@ -9,15 +14,15 @@
 
 # run as sudo
 
-urpmi --auto b43-fwcutter b43-openfwwf b43-tools
-cd ~/Downloads
-mkdir broadcom-4331
-cd broadcom-4331
-wget http://www.lwfinger.com/b43-firmware/broadcom-wl-5.100.138.tar.bz2
-tar -xjf broadcom-wl-5.100.138.tar.bz2
-b43-fwcutter -w /lib/firmware/ broadcom-wl-5.100.138/linux/wl_apsta.o
-rmmod b43
-modprobe b43
+# urpmi --auto b43-fwcutter b43-openfwwf b43-tools
+# cd ~/Downloads
+# mkdir broadcom-4331
+# cd broadcom-4331
+# wget http://www.lwfinger.com/b43-firmware/broadcom-wl-5.100.138.tar.bz2
+# tar -xjf broadcom-wl-5.100.138.tar.bz2
+# b43-fwcutter -w /lib/firmware/ broadcom-wl-5.100.138/linux/wl_apsta.o
+# rmmod b43
+# modprobe b43
 
 # you should not install broadcom-bcma-config and rfkill
 # you should reboot after that

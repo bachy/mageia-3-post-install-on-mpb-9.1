@@ -9,7 +9,6 @@
 
 exit 0
 
-#sublime text 2
 cd ~/Downloads
 mkdir koala
 cd koala
@@ -41,5 +40,5 @@ X-Ayatana-Desktop-Shortcuts=NewWindow
 [NewWindow Shortcut Group]
 Name=New Window
 Exec=koala
-TargetEnvironment=Unity" > /usr/local/share/applications/sublime.desktop
+TargetEnvironment=Unity" > /usr/local/share/applications/koala.desktop
 
