@@ -23,8 +23,13 @@ service mysqld start
 
 #mysql
 MysqlUser = "root"
-MysqlPass = "Lhip2L2Mysql!"
+MysqlPass = "__________"
 mysqladmin -u $MysqlUser password $MysqlPass
+
+# TODO
+# setup the export all dbs in cron script
+
+
 
 # Todo : import all db automaticly 
 # cd ~/Developper/mysql.back
